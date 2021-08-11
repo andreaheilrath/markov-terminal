@@ -3,17 +3,23 @@ from collections import Counter
 import random
 from termcolor import colored
 import os
+import pickle
 
-#os.system("color 0F")
+#os.system("colora 0A")
 
 class markov_terminal:
 
     def __init__(self, corpus):
-        self.tokens = self.tokens_from_file(corpus)
-        self.trigrams = {}
         self.head = ""
-        self.add_trigrams(self.tokens)
-
+        if os.path.exists('trigrams.pkl'):
+            self.dump = open("trigrams.pkl", mode="rb")
+            self.trigrams = pickle.load(self.dump)
+            self.dump.close()
+            self.dump = open("trigrams.pkl", mode="wb")
+        else:
+            self.trigrams = {}
+            self.add_trigrams(self.tokens_from_file(corpus))
+            self.dump = open("trigrams.pkl", mode="wb")
         self.log = open("log.txt", mode="a")
         self.running = True
 
@@ -70,9 +76,10 @@ class markov_terminal:
                     sentence += tail + " "
                     word_count += 1
                 self.head = " ".join(sentence.split()[-2:])
-            #print(colored(sentence, 'green'))
+            
             self.log.write(sentence+'\n')
-            print(sentence[1:-1])
+            #print(sentence[1:-1])
+            print(colored(sentence[1:-1], 'green'))
 
     def listen(self):
         user_input = input()
@@ -84,16 +91,20 @@ class markov_terminal:
             input_list = user_input.split()
             self.add_trigrams(input_list)
             self.head = " ".join(input_list[-2:])
+            pickle.dump(self.trigrams, self.dump)
             #print(self.head)
 
 
 
     def conversation(self):
+        os.system("stty intr ''")
         while(self.running):
             self.talk(sentences=1)
             #print(self.head)
             self.listen()
             #print(self.head)
+        os.system("stty sane")
+        self.dump.close()
 
 
 
