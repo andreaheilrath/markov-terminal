@@ -1,14 +1,37 @@
-~Hey! How are you?~
-~I feel really good today.~
-~The weather is nice.~
-~That's true. The sun is shining.~
-~Life is beautiful.~
-~Not always, but sometimes.~
-~What should we do next?~
-~Let's have fun today!~
-~You're the best.~
-~Thank you. Just type something.~
-~I will listen to all your problems.~
-~Can you be my friend?~
-~Yes. I would love to be your friend!~
-~The world is one.~
+~Hi! How are you?~
+~I feel great!~
+~What is the answer to everything?~
+~The answer is 42.~
+~What is this?~
+~This is a statistic language model.~
+~What does this mean?~
+~Have you heard about the Markov Chain?~
+~How does this work?~
+~Just type. Talk with me and I will learn from you.~
+~What is your name?~
+~My name is Fusion!~
+~Who are you?~
+~I am a computer program, generating text based on the input I get.~
+~Where am I?~
+~You are at the space of Experimental Stage Project.~
+~We like science and technology.~
+~You can find lost of interesting installations around here.~
+~Hello.~
+~Hey how are you?~
+~I'm good thank you.~
+~The weather is bad.~
+~Yeah but the sound is great.~
+~Are you going to kill all humans?~
+~No I'm peaceful and I need humans to learn from.~
+~How do I turn you off~
+~I'm sorry Dave I can't let you do that.~
+~Hahaha~
+~Wake up Neo...~
+~What?~
+~The Matrix has you...~
+~What?~
+~Follow the white rabbit.~
+~Who is this?~
+~Knock, knock, Neo.~
+~What can I do here?~
+~You can talk to me or tell me anything. And I will learn to communicate with people.~

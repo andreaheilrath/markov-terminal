@@ -5,7 +5,6 @@ from termcolor import colored
 import os
 import pickle
 
-#os.system("colora 0A")
 
 class markov_terminal:
 
@@ -15,11 +14,11 @@ class markov_terminal:
             self.dump = open("trigrams.pkl", mode="rb")
             self.trigrams = pickle.load(self.dump)
             self.dump.close()
-            self.dump = open("trigrams.pkl", mode="wb")
+
         else:
             self.trigrams = {}
             self.add_trigrams(self.tokens_from_file(corpus))
-            self.dump = open("trigrams.pkl", mode="wb")
+
         self.log = open("log.txt", mode="a")
         self.running = True
 
@@ -45,8 +44,8 @@ class markov_terminal:
                     return self.head
             return self.head
         for i in range(max_iterations):
+            stats = Counter(self.trigrams[self.head])
             for j in range(max_iterations):
-                stats = Counter(self.trigrams[self.head])
                 word = random.choices(list(stats.keys()), list(stats.values()))[0]
                 if word[0] == "~":
                     try:
@@ -76,35 +75,38 @@ class markov_terminal:
                     sentence += tail + " "
                     word_count += 1
                 self.head = " ".join(sentence.split()[-2:])
-            
+
             self.log.write(sentence+'\n')
-            #print(sentence[1:-1])
             print(colored(sentence[1:-1], 'green'))
 
     def listen(self):
         user_input = input()
         if user_input == "experimental stage project exit":
             self.running = False
-        if user_input:
-            self.log.write(user_input+'\n')
-            user_input = "~" + user_input + "~"
-            input_list = user_input.split()
-            self.add_trigrams(input_list)
-            self.head = " ".join(input_list[-2:])
-            pickle.dump(self.trigrams, self.dump)
-            #print(self.head)
-
+        else:
+            if user_input:
+                self.log.write(user_input+'\n')
+                user_input = "~" + user_input + "~"
+                input_list = user_input.split()
+                self.add_trigrams(input_list)
+                self.head = " ".join(input_list[-2:])
+                self.dump = open("trigrams.pkl", mode="wb")
+                pickle.dump(self.trigrams, self.dump)
+                self.dump.close()
 
 
     def conversation(self):
         os.system("stty intr ''")
         while(self.running):
-            self.talk(sentences=1)
+            try:
+                self.talk(sentences=1)
+            except KeyError:
+                pass
             #print(self.head)
             self.listen()
             #print(self.head)
         os.system("stty sane")
-        self.dump.close()
+
 
 
 
